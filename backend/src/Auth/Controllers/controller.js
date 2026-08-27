@@ -91,10 +91,43 @@ const handleLogout = async(req, res) => {
   
 };
 
+const handleForgotPassword = async(req, res)=>{
+  try {
+    const {email} = req.body;
+    
+    await Services.forgotPassword({email});
+    res.status(200).json({
+      message:'check you mailbox to reset your  password'
+    })
+  } catch (error) {
+    res.status(500).json({
+      message:'internal server error',
+      err:error.message
+    })
+  }
+}
+const handleResetPassword = async(req, res)=>{
+  try {
+    const token  = req.params.token;
+    const {password} =  req.body;
+    await Services.resetPassword({password, token});
+    res.status(200).json({
+      message:'password changed successfully! you can login now!'
+    })
+  } catch (error) {
+    res.status(500).json({
+      message:'internal server error',
+      err:error.message,
+    })
+  }
+}
+
 module.exports = {
   handleRegister,
   handleVerifyEmail,
   handleResendVerificationEmail,  
   handleLogin,
   handleLogout,
+  handleForgotPassword,
+  handleResetPassword
 };

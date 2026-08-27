@@ -81,16 +81,47 @@ class Services {
     };
   };
 
-  static logoutUser = async (token)=>{
+  static logoutUser = async (token) => {
     const decode = TokenService.verifyAccesToken(token);
-    if(!decode) throw new Error('unauthorized , invalid token');
+    if (!decode) throw new Error("unauthorized , invalid token");
 
-    const user = await User.findById({_id:decode.id});
-    if(!user) throw new Error ('user not found')
+    const user = await User.findById({ _id: decode.id });
+    if (!user) throw new Error("user not found");
 
     user.refreshToken = undefined;
     user.save();
+  };
 
+  static forgotPassword = async ({ email }) => {
+    if (!email) throw new Error("email is required");
+    const user = await User.findOne({ email });
+    if (!user) throw new Error("user not found");
+
+    const tokenIsValid = 
+      user.passwordToken && 
+      user.passwordTokenExpiresIn && 
+      user.passwordTokenExpiresIn > Date.now();
+
+    if(tokenIsValid) throw new Error('Paassword link alreday Sent. Please check your email. and try after sometime!')
+    const name = user.name;
+    const token = await user.generatePasswordToken();
+    await EmailService.sendPasswordLinkEmail({name, email, token });
+  };
+
+  static resetPassword = async ({password, token})=>{
+    if(!token) throw new Error("missing token ")
+    if (!password) throw new Error("password is required");
+    const user =  await User.findOne({
+      passwordToken:token,
+      passwordTokenExpiresIn:{$gt :Date.now()}
+    });
+
+    if(!user) throw new Error('invalid or expired token');
+
+    user.password = password;
+    user.passwordToken = undefined;
+    user.passwordTokenExpiresIn=undefined;
+    await user.save();
   }
 }
 

@@ -9,7 +9,6 @@ const userSchema = new  mongoose.Schema({
         type:String,
         required:[true, 'fill the name']
     },
-
     email:{
         type:String,
         required:[true, 'please add a email'],
@@ -30,7 +29,9 @@ const userSchema = new  mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:'Role',
         required:[true,'Role must be assign plaese ']
-    }
+    },
+    passwordToken:String,
+    passwordTokenExpiresIn:Date,
 }, {
     timestamps:true
 });
@@ -58,6 +59,15 @@ userSchema.methods.generateEmailVerifactionToken = async function(){
     const token = crypto.randomBytes(32).toString('hex');
     this.emailVerifactionToken = token;
     this.emailVerifactionExpiresIn = Date.now() + 30 * 60 * 1000 // 30 minutes
+    await this.save();
+    return token;
+}
+
+//generate token for psssword reset
+userSchema.methods.generatePasswordToken = async function () {
+    const token = crypto.randomBytes(32).toString('hex');
+    this.passwordToken = token;
+    this.passwordTokenExpiresIn = Date.now() + 5 * 60 * 1000 // 5 min valid
     await this.save();
     return token;
 }
