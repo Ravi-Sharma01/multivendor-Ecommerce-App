@@ -6,7 +6,7 @@ const {handleRegister,
         handleLogin,
         handleForgotPassword,
         handleResetPassword
-} = require('../Controllers/controller');
+} = require('../controllers/auth.controller');
 
 const router = express.Router();
 

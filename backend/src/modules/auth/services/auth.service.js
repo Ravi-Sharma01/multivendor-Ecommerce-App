@@ -1,7 +1,7 @@
 const User = require("../models/user.model");
 const Role = require("../models/role.model");
-const EmailService = require("../../services/Email.service");
-const TokenService = require("../../Services/token.service");
+const EmailService = require("../../../shared/services/email.service");
+const TokenService = require("../../../shared/services/token.service");
 
 class Services {
   //register new user

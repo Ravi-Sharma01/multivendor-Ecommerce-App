@@ -1,5 +1,5 @@
-const EmailService = require("../../services/Email.service");
-const Services = require("../Services/service");
+const EmailService = require("../../../shared/services/email.service");
+const Services = require("../services/auth.service");
 
 const handleRegister = async (req, res) => {
   try {

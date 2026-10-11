@@ -30,8 +30,15 @@ const userSchema = new  mongoose.Schema({
         ref:'Role',
         required:[true,'Role must be assign plaese ']
     },
+
     passwordToken:String,
     passwordTokenExpiresIn:Date,
+
+    vandorApplliactionStatus:{
+        type:String,
+        enum:['none', 'pending', 'approved', 'rejected'],
+        default:'none'
+    }
 }, {
     timestamps:true
 });

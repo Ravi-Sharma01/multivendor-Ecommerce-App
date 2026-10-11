@@ -19,5 +19,12 @@ module.exports = {
         user:process.env.EMAIL_USERNAME,
         password:process.env.EMAIL_PASSWORD,
         from:process.env.EMAIL_FROM
+    },
+
+    sandbox:{
+        apikey:process.env.SANDBOX_API_KEY,
+        secret:process.env.SANDBOX_API_KEY_SECRET,
+        gstVerifyUrl:process.env.SANNDBOX_URL,
+        authUrl:process.env.SANBOX_AUTH_URL,
     }
 };

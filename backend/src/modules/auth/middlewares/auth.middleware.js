@@ -1,5 +1,5 @@
 const { verify } = require("crypto");
-const TokenService = require("../../Services/token.service");
+const TokenService = require("../../../shared/services/token.service");
 const { log } = require("console");
 
 const isAuthenicated = async (req, res, next) => {

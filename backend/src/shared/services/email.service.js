@@ -1,6 +1,6 @@
 const nodemailer = require("nodemailer");
-const { email } = require("../config/env.config");
-const User = require("../Auth/models/user.model");
+const { email } = require("../../config/env.config");
+const User = require("../../modules/auth/models/user.model");
 
 class EmailService {
   static async #sendmail({ to, subject, html }) {

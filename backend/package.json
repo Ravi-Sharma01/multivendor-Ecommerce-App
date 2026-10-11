@@ -2,17 +2,18 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/server.js",
   "scripts": {
-    "seed": "node src/config/seed.js",
-    "start": "node src/Main.js",
-    "dev": "nodemon src/Main.js"
+    "seed": "node src/database/seeds/seed.js",
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
+    "axios": "^1.20.0",
     "bcrypt": "^6.0.0",
     "body-parser": "^2.3.0",
     "cookie-parser": "^1.4.7",

@@ -1,9 +1,9 @@
 require('dotenv').config();
 
 const mongoose = require('mongoose');
-const connectDb = require('./db.config');
-const Permission = require('../Auth/models/permission.model');
-const Role = require('../Auth/models/role.model');
+const connectDb = require('../../config/db.config');
+const Permission = require('../../modules/auth/models/permission.model');
+const Role = require('../../modules/auth/models/role.model');
 
 const permissionNames = [
     // Customer
