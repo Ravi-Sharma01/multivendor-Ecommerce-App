@@ -9,11 +9,7 @@ router.get("/user",isAuthenicated, authorize("customer", "admin"), (req, res) =>
   });
 });
 
-router.get('/vendor',isAuthenicated, authorize("vendor", "admin"), (req, res)=>{
-    res.status(200).json({
-        message:`welcome vendor`
-    })
-})
+
 
 router.get('/admin',isAuthenicated, authorize("admin"), (req, res)=>{
     res.status(200).json({

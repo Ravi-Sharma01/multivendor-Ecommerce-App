@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const shopSchema = new mongoose.Schema({
    
-    name:{
+    shopName:{
         type:String,
         required:[true, 'name is required']
     },
@@ -13,8 +13,9 @@ const shopSchema = new mongoose.Schema({
     },
 
     address:{
-        type:String,
-        required:[true, 'address is required']
+        address:{type:String, required:[true, 'adress is required']},
+        state :{type:String, required:[true, 'state is required']},
+        city:{type:String, required:[true, 'city name is required']},
     },
     gstNumber :{
         type:String,
@@ -34,7 +35,7 @@ const shopSchema = new mongoose.Schema({
         type:String,
         default:''
     },
-    bankDertails:{
+    bankDetails:{
         accountNumber:{type:String, required:[true, 'acc number is required']},
         ifscCode:{type:String, required:[true, 'ifsc code is required']},
         bankName:{type:String, required:[true, 'bank name is required']},
@@ -45,8 +46,13 @@ const shopSchema = new mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:'User',
         required:[true, 'vendor id is required']
-    }
-})
+    },
+    rejectionReason :{
+        type:String,
+        default:''
+    },
+    isVerified:{type:Boolean, default:false}
+}, {timestamps:true})
 
 const Shop = mongoose.model('Shop', shopSchema, 'shops');
 module.exports = Shop;
